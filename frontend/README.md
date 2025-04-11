@@ -1,6 +1,12 @@
 ## Getting Started
 
-First, run the development server:
+Setup environment
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -8,13 +14,12 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+NOTE: Don't forget to start the backend server as well!
 
-## Learn More
+## Frontend Stack
 
-To learn more about Next.js, take a look at the following resources:
+Here is the full frontend stack for this project.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [React](https://react.dev/) - Was listed as a preferred requirement.
+- [Next.js](https://nextjs.org/) - React framework that looks good.
+- [TypeScript](https://www.typescriptlang.org/) - Better JavaScript
