@@ -35,7 +35,7 @@ namespace PHIRedaction.Controllers
             FileInformation newFileInfo = new()
             {
                 FileName = originalFileInfo.FileName.Replace(".txt", "_redacted.txt"),
-                FileContent = await RedactionService.RedactText(originalFileInfo.FileContent)
+                FileContent = RedactionService.RedactText(originalFileInfo.FileContent)
             };
 
             // Store both files for logging
