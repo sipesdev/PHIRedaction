@@ -11,27 +11,58 @@ export default function Home() {
   const handleFileUpload = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevent default form behavior
     setError(null); // Reset error state
-    setProcessing(false); // Reset processing state
+    setProcessing(true); // Set processing state
     const formData = new FormData(event.currentTarget);
     
     try {
       // Send the file to the backend
-      const response = await fetch("localhost:8000/api/upload", {
+      const response = await fetch("http://localhost:5128/api/File/upload", {
         method: "POST",
         body: formData,
       });
 
       // Handle the response
       if (response.ok) {
-        const result = await response.json();
-        console.log("File uploaded successfully:", result);
+        // Get the file name from the content disposition header
+        const contentDisposition = response.headers.get("content-disposition");
+        let fileName = "example_redacted.txt"; // Default file name
+        
+        // Extract the file name from the content disposition header
+        if (contentDisposition) {
+          const fileNameMatch = contentDisposition.match(/filename="?(.+)"?/i);
+          if (fileNameMatch && fileNameMatch.length > 1) {
+            fileName = fileNameMatch[1];
+          }
+        }
+
+        // Get the response body as a blob
+        const blob = await response.blob();
+
+        // Create a temp URL for the blob
+        const url = window.URL.createObjectURL(blob);
+
+        // Create a temporary anchor element to trigger the download
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click(); // Trigger the download
+
+        // Clean up
+        a.remove();
+        window.URL.revokeObjectURL(url);
+
+        console.log("File processed and being sent to client.");
+
       } else {
         console.error("File upload failed:", response.statusText);
-        setError(`File upload failed with status: ${response.status}`);
+        setError(`File upload failed with status: ${response.statusText}`);
       }
     } catch (ex) {
       console.error("An unexpected error occured:", ex);
       setError(`${ex}`);
+    } finally {
+      setProcessing(false); // Reset processing state
     }
   }
 
