@@ -1,3 +1,4 @@
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using PHIRedaction.Models;
 using PHIRedaction.Services;
@@ -36,8 +37,14 @@ namespace PHIRedaction.Controllers
                 FileName = originalFileInfo.FileName.Replace(".txt", "_redacted.txt"),
                 FileContent = await RedactionService.RedactText(originalFileInfo.FileContent)
             };
+
+            // Store both files for logging
+            await FileService.StoreFile(originalFileInfo);
+            await FileService.StoreFile(newFileInfo);
             
-            return FileStreamResult();
+            // Return the new file as a downloadable file
+            var fileBytes = Encoding.UTF8.GetBytes(newFileInfo.FileContent);
+            return File(fileBytes, "text/plain", newFileInfo.FileName);
         }
 
         /// <summary>
