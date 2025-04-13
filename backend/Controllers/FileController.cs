@@ -42,14 +42,5 @@ namespace PHIRedaction.Controllers
             Console.WriteLine($"File {newFileInfo.FileName} redacted, sending to client...");
             return File(fileBytes, "text/plain", newFileInfo.FileName);
         }
-
-        /// <summary>
-        /// Simple test endpoint to make sure API is working
-        /// </summary>
-        [HttpGet("test")] // GET api/File/test
-        public IActionResult Test()
-        {
-            return Ok("Test endpoint is working.");
-        }
     }
 }

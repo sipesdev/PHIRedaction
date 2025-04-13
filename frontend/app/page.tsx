@@ -31,7 +31,7 @@ export default function Home() {
         if (contentDisposition) {
           const fileNameMatch = contentDisposition.match(/filename="?(.+)"?/i);
           if (fileNameMatch && fileNameMatch.length > 1) {
-            fileName = fileNameMatch[1];
+            fileName = fileNameMatch[0];
           }
         }
 
