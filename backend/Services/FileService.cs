@@ -5,7 +5,7 @@ namespace PHIRedaction.Services
 {
     public class FileService
     {
-        // Easy to access variable so I don't have to dig through code to change it :)
+        // Scary variable
         private static readonly string _directory = "uploads";
 
         /// <summary>

@@ -4,8 +4,8 @@ namespace PHIRedaction.Services
 {
     public class RedactionService
     {
-        // TODO: Move all of this into separate classes
-        private static readonly string _redactionPattern = @"^(Patient Name: |Date of Birth: |Social Security Number: |Address: |Phone Number: |Email: |Medical Record Number: )(.*)$";
+        // Regex pattern to match sensitive information
+        private static readonly string _redactionPattern = @"^(Patient Name:|Date of Birth:|Social Security Number:|Address:|Phone Number:|Email:|Medical Record Number:)(.*)$";
         private static readonly string _redactionReplacement = "$1[REDACTED]";
 
         // Compiled regex for all the performance gains

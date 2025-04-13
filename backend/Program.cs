@@ -6,6 +6,9 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+// Add helper to scope
+builder.Services.AddScoped<PHIRedaction.Interfaces.IUploadHelper, PHIRedaction.Helpers.UploadHelper>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,7 +1,8 @@
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using PHIRedaction.Models;
-using PHIRedaction.Services;
+using PHIRedaction.Helpers;
+using PHIRedaction.Interfaces;
 
 namespace PHIRedaction.Controllers
 {
@@ -9,6 +10,13 @@ namespace PHIRedaction.Controllers
     [Route("api/[controller]")]
     public class FileController : ControllerBase
     {
+        private IUploadHelper uploadHelper;
+
+        public FileController(IUploadHelper uploadHelper)
+        {
+            this.uploadHelper = uploadHelper;
+        }
+
         /// <summary>
         /// Uploads a file to the server
         /// </summary>
@@ -24,26 +32,14 @@ namespace PHIRedaction.Controllers
                 return BadRequest(message);
             }
 
-            // Create a FileInformation object to store file information
-            FileInformation originalFileInfo = new()
-            {
-                FileName = file.FileName,
-                FileContent = await FileService.ReadFileContent(file)
-            };
-            
-            // Create the new FileInformation object to store the new file information
-            FileInformation newFileInfo = new()
-            {
-                FileName = originalFileInfo.FileName.Replace(".txt", "_redacted.txt"),
-                FileContent = RedactionService.RedactText(originalFileInfo.FileContent)
-            };
+            // Redact the file
+            FileInformation newFileInfo = await uploadHelper.RedactFile(file);
 
-            // Store both files for logging
-            await FileService.StoreFile(originalFileInfo);
-            await FileService.StoreFile(newFileInfo);
-            
+            // Encode the file
+            byte[] fileBytes = uploadHelper.EncodeFile(newFileInfo);
+
             // Return the new file as a downloadable file
-            var fileBytes = Encoding.UTF8.GetBytes(newFileInfo.FileContent);
+            Console.WriteLine($"File {newFileInfo.FileName} redacted, sending to client...");
             return File(fileBytes, "text/plain", newFileInfo.FileName);
         }
 
