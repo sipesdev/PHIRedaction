@@ -11,19 +11,15 @@ Make sure you have the following software installed and included in your system'
 
 ## Getting Started
 
-1. First clone the project with your prefferred method.
+1. First clone the project with your preferred method.
 
 2. Run the setup script:
-
-- Windows: `./setup.bat`.
-
-- Linux/MacOS: `./setup.sh`.
+    - Windows: `./setup.bat`.
+    - Linux/MacOS: `./setup.sh`.
 
 3. Run the entire stack from this script:
-
-- Windows: `./start.bat`
-
-- Linux/MacOS: `./start.sh`
+    - Windows: `./start.bat`
+    - Linux/MacOS: `./start.sh`
 
 4. The frontend server is hosted at `localhost:3000`. If you are using an API tester, the backend is hosted at `localhost:5128`
 
@@ -33,12 +29,12 @@ Make sure you have the following software installed and included in your system'
 
 - The Windows start script will open two cmd prompts, this is normal. (Thanks Microsoft)
 
-- Do not call the scripts directly like this: `start.sh`. The preceding `./` tells the OS to start the scripts in the current path. As such, do not execute the scripts outside of this repo's directory structure. They are programmed with the assumption that both `backend/` and `frontend/` are in the current working directory.
+- Do not call the scripts directly like this: `> start.sh`. The preceding `./` tells the OS to start the scripts in the current path. As such, do not execute the scripts outside of this repo's directory structure. They are programmed with the assumption that both `backend/` and `frontend/` are in the current working directory.
 
 ## Known Issues and Potential Notes
 
-- Although it stores the file correctly in the backend as "sample_1_redacted.txt", when sent to the client the file will be renamed to "sample_redacted.txt". This could be due to the poor frontend code I have written to initiate a download.
+- Although it stores the file correctly in the backend as "sample_1_redacted.txt", when sent to the client, the file will be renamed to "sample_redacted.txt" regardless of the previous name. This could be due to the poor frontend code I have written to initiate a download or just failure to parse out the received blob.
 
 - If the client's browser knowingly blocks downloads or popups, there is no other way to initiate the download. In the future, it would be better to also add a "CLICK ME IF DOWNLOAD FAILS!" button.
 
-- Regex would be best replaced with AI, as regex does have limitations with this kind of things. Either that or I could separate out all the redaction strategies as Regex strings, then use string concatenation to merge them before compiling.
+- Regex would be best replaced with AI, as regex does have limitations with this kind of thing. Either that or I could separate out all the redaction strategies as separate strings, then use string concatenation to merge them before compiling to regex.
