@@ -4,7 +4,7 @@ This application includes a React frontend and ASPDOTNET backend API to handle t
 
 ## Requirements
 
-Make sure you have the following software installed and included in your system's `$PATH`.
+MAKE SURE you have the following software installed and included in your system's `$PATH`.
 
 - [.NET 9.0](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
 - [Node v22.14.0](https://nodejs.org/en)
@@ -29,11 +29,11 @@ Make sure you have the following software installed and included in your system'
 
 - The Windows start script will open two cmd prompts, this is normal. (Thanks Microsoft)
 
-- Do not call the scripts directly like this: `> start.sh`. The preceding `./` tells the OS to start the scripts in the current path. As such, do not execute the scripts outside of this repo's directory structure. They are programmed with the assumption that both `backend/` and `frontend/` are in the current working directory.
+- Do not call the scripts directly like this: `start.sh`. The preceding `./` tells the OS to start the scripts in the current path. As such, do not execute the scripts outside of this repo's directory structure. They are programmed with the assumption that both `backend/` and `frontend/` are in the current working directory.
+
+- The scripts are meant to be ran in the root repo directory so make sure that your terminal is `cd`ed INSIDE the project instead of above or in `backend/` or `frontend/`.
 
 ## Known Issues and Potential Notes
-
-- Although it stores the file correctly in the backend as "sample_1_redacted.txt", when sent to the client, the file will be renamed to "sample_redacted.txt" regardless of the previous name. This could be due to the poor frontend code I have written to initiate a download or just failure to parse out the received blob.
 
 - If the client's browser knowingly blocks downloads or popups, there is no other way to initiate the download. In the future, it would be better to also add a "CLICK ME IF DOWNLOAD FAILS!" button.
 

@@ -27,11 +27,11 @@ export default function Home() {
         const contentDisposition = response.headers.get("content-disposition");
         let fileName = "example_redacted.txt"; // Default file name
         
-        // Extract the file name from the content disposition header
+        // Extract the file name from the content disposition header using regex
         if (contentDisposition) {
-          const fileNameMatch = contentDisposition.match(/filename="?(.+)"?/i);
+          const fileNameMatch = contentDisposition.match(/filename="?([^";]+)"?/i);
           if (fileNameMatch && fileNameMatch.length > 1) {
-            fileName = fileNameMatch[0];
+            fileName = fileNameMatch[1];
           }
         }
 
